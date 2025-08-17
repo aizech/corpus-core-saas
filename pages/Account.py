@@ -1,7 +1,6 @@
 import streamlit as st
 import stripe
 from st_paywall import add_auth
-from config import config
 
 # Page title
 one_cola = st.columns([1])[0]
@@ -34,6 +33,8 @@ def is_email_subscribed_to_product(email):
 is_subscribed = is_email_subscribed_to_product(st.user.email)
 
 # Language selection
+# get browser language
+#st.write(f"Locale: {st.context.locale}")
 browser_language = st.session_state.get('browser_language', 'en')
 if 'lang' not in st.session_state:
     st.session_state.lang = browser_language
@@ -91,49 +92,55 @@ if st.user.is_logged_in:
     st.markdown("---")
 
     if is_subscribed:
-        st.markdown(f"""**Thank You for Being a Valued Subscriber!**
+        st.markdown(f"*{_lang['Thank you for being a Valued Subscriber!']}*", unsafe_allow_html=True)
+        
+        st.markdown("""
 
-**Dear {st.user.name},**
+**{_lang['Dear']} {st.user.name},**
 
-We want to extend our heartfelt thanks for placing your trust in Gods in White and the Corpus Analytica mission. Your subscription empowers us to continue building a platform where cutting-edge technology meets compassionate care.
+{_lang['We want to extend our heartfelt thanks for placing your trust in Gods in White and the Corpus Analytica mission. Your subscription empowers us to continue building a platform where cutting-edge technology meets compassionate care.']}.
 
-With your support, you have access to:
+{_lang['With your support, you have access to:']}:
 
-- 🧠 Unlimited medical image analysis
+- 🧠 {_lang['Unlimited medical image analysis']}
 
-- 💬 Direct chat with expert AI doctors
+- 💬 {_lang['Direct chat with expert AI doctors']}
 
-Your commitment helps us bring clarity, confidence, and convenience to healthcare—one image, one consultation, one life at a time.
+{_lang['Your commitment helps us bring clarity, confidence, and convenience to healthcare—one image, one consultation, one life at a time.']}.
 
-> *"Every subscriber strengthens our vision: to make expert medical guidance accessible to everyone, everywhere."* — Bernhard Z., Founder of Corpus Analytica
+> *"{_lang['Every subscriber strengthens our vision: to make expert medical guidance accessible to everyone, everywhere.']}"* — Bernhard Z., Founder of Corpus Analytica
 
-Thank you for being part of this journey. We're honored to support yours.
+{_lang['Thank you for being part of this journey. We\'re honored to support yours.']}
 
-Warm regards, **The Corpus Analytica Team**
+{_lang['Warm regards, The Corpus Analytica Team']}
             
             """, unsafe_allow_html=True)
+    
+    
     else:
-        st.markdown(f"""**You are a {account_type} subscriber.**
-            
-## :material/star: Unlock the Power of Expert Medical Insight
+        #st.markdown(f"**{_lang['You are a']} {account_type} {_lang['subscriber']}.**")
+        st.markdown(f"**{_lang['Thank you for being a Valued Subscriber!']}**")
+        st.markdown("---")
+        st.markdown(f"""    
+## :material/star: {_lang['Unlock the Power of Expert Medical Insight']}
 
-**Dear {st.user.name},**
+**{_lang['Dear']} {st.user.name},**
 
-Imagine having instant access to world-class physicians, AI-powered medical image analysis, and second opinions from specialists across the globe—all in one place.
+{_lang['Imagine having instant access to world-class physicians, AI-powered medical image analysis, and second opinions from specialists across the globe—all in one place.']}
 
-That's what Gods in White offers.
+{_lang['That\'s what Gods in White offers.']}
 
-By subscribing, you'll gain:
+{_lang['By subscribing, you\'ll gain:']}
 
-- 🧠 Unlimited access to medical image analysis
+- 🧠 {_lang['Unlimited access to medical image analysis']}
 
-- 💬 Direct chat with expert AI doctors
+- 💬 {_lang['Direct chat with expert AI doctors']}
 
-Whether you're seeking clarity, reassurance, or a deeper understanding of your health, our platform is built to support you—securely, intelligently, and compassionately.
+{_lang['Whether you\'re seeking clarity, reassurance, or a deeper understanding of your health, our platform is built to support you—securely, intelligently, and compassionately.']}
 
-Join the movement toward smarter, more accessible healthcare. Your journey to peace of mind starts here.
+{_lang['Join the movement toward smarter, more accessible healthcare. Your journey to peace of mind starts here.']}
 
-:material/lock_open: Upgrade to experience the future of digital health.
+:material/lock_open: {_lang['Upgrade to experience the future of digital health.']}
 
             """, unsafe_allow_html=True)
         add_auth(
@@ -145,7 +152,7 @@ Join the movement toward smarter, more accessible healthcare. Your journey to pe
             use_sidebar=False  # Show button in main section
         )
 
-        st.markdown("Warm regards, **The Corpus Analytica Team**", unsafe_allow_html=True)
+        st.markdown(_lang["Warm regards, **The Corpus Analytica Team**"], unsafe_allow_html=True)
 
 else:
     st.markdown(_lang["Please login first"]) 

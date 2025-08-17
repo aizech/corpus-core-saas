@@ -49,7 +49,7 @@ st.set_page_config(
     page_title="GodsinWhite Login", 
     page_icon=icon_image,
     layout="centered",
-    initial_sidebar_state="collapsed"
+    #initial_sidebar_state="collapsed"
 )
 
 # Logo in sidebar
@@ -132,8 +132,8 @@ else:
         if not is_subscribed:
             col1p = st.columns([1], vertical_alignment="center", border=True)[0]
             with col1p:
-                st.markdown("<p align='center' style='font-size: 20px; font-weight: bold;'>Upgrade to Premium</p>", unsafe_allow_html=True)
-                st.markdown("<p align='center' style='font-size: 14px;'>Get 14 days free and unlock all Premium features.</p>", unsafe_allow_html=True)
+                st.markdown(f"<p align='center' style='font-size: 20px; font-weight: bold;'>{_lang['Upgrade to Premium']}</p>", unsafe_allow_html=True)
+                st.markdown(f"<p align='center' style='font-size: 14px;'>{_lang['Get 14 days free and unlock all Premium features.']}</p>", unsafe_allow_html=True)
                 col1up = st.columns([1])[0]
             with col1up:
                 add_auth(
@@ -165,7 +165,7 @@ else:
             st.markdown(f"<a href='{account_page}' style='text-decoration: none;' target='_self'><div style='margin-top: 15px;'>{st.user.name}</div></a>", unsafe_allow_html=True)
             st.markdown(f"<div style='margin-top: -22px; color:{color}; font-size: 12px'>{account_type}</div>", unsafe_allow_html=True)
 
-        if st.button(":material/logout: Sign out", use_container_width=True, type="secondary"):
+        if st.button(f":material/logout: {_lang['Sign out']}", use_container_width=True, type="secondary"):
             st.logout()
             st.rerun()
             

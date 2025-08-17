@@ -1,5 +1,6 @@
 import streamlit as st
 from config import config
+from st_paywall import add_auth
 
 # Set page config
 icon_image = f"{config.LOGO_ICON_PATH}{st.session_state.theme}.png"
@@ -9,6 +10,24 @@ st.set_page_config(
     #layout="wide",
     #initial_sidebar_state="collapsed"
 )
+
+# Language selection
+# get browser language
+#st.write(f"Locale: {st.context.locale}")
+browser_language = st.session_state.get('browser_language', 'en')
+if 'lang' not in st.session_state:
+    st.session_state.lang = browser_language
+    lang = browser_language
+else:
+    lang = st.session_state.lang
+
+if lang == 'en':
+    from locales.en import translations
+elif lang == 'de':
+    from locales.de import translations
+
+_lang = translations[lang]
+
 
 if st.user.is_logged_in:
     one_cola = st.columns([1])[0]
@@ -20,12 +39,12 @@ if st.user.is_logged_in:
             st.image(f"assets/godsinwhite_team_{st.session_state.theme}.png", width=400)
             #st.image(team_image, width=400)
         with col2a:
-            st.markdown("""
-            # Welcome to GodsinWhite  
-            GodsinWhite is a platform for creating, assembling and reusing AI-Agents and Tools for medical purposes.
+            st.markdown(f"""
+            ## {_lang["Welcome to GodsinWhite"]}  
+            {_lang["GodsinWhite is a platform for creating, assembling and reusing AI-Agents and Tools for medical purposes."]}
             """, unsafe_allow_html=True)
 
-        st.markdown(f"Nice to see you, {st.user.name}")
+        st.markdown(f"{_lang['Nice to see you']}, {st.user.name}")
         #st.image(st.user.picture)
         #st.markdown(" ")
         #st.markdown("You are logged in")
