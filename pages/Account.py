@@ -1,0 +1,153 @@
+import streamlit as st
+import stripe
+from st_paywall import add_auth
+from config import config
+
+# Page title
+one_cola = st.columns([1])[0]
+with one_cola:
+    col1a, col2a = st.columns([2, 6])
+
+    with col1a:
+        #team_image = config.LOGO_TEAM_PATH
+        st.image(f"assets/godsinwhite_team_{st.session_state.theme}.png", width=400)
+        #st.image(team_image, width=400)
+    with col2a:
+        st.markdown("""
+        # Account
+        """, unsafe_allow_html=True)
+
+
+# Set Stripe API key from secrets
+if st.secrets.get("testing_mode", False):
+    stripe.api_key = st.secrets.get("stripe_api_key_test", "")
+else:
+    stripe.api_key = st.secrets.get("stripe_api_key", "")
+
+def is_email_subscribed_to_product(email):
+    for customer in stripe.Customer.list(email=email):
+        for subscription in stripe.Subscription.list(customer=customer['id']):
+            #if subscription['plan']['product'] == product:
+            return True
+    return False
+
+is_subscribed = is_email_subscribed_to_product(st.user.email)
+
+# Language selection
+browser_language = st.session_state.get('browser_language', 'en')
+if 'lang' not in st.session_state:
+    st.session_state.lang = browser_language
+    lang = browser_language
+else:
+    lang = st.session_state.lang
+
+if lang == 'en':
+    from locales.en import translations
+elif lang == 'de':
+    from locales.de import translations
+
+_lang = translations[lang]
+
+
+if st.user.is_logged_in:
+    #st.markdown(f"## Welcome {st.user.name}")
+
+    if is_subscribed:
+        account_type = _lang["Premium (Paid)"]
+    else:
+        account_type = _lang["Free (Trial)"]
+    
+    avatar = st.user.picture
+
+    account_container = st.container()
+    with account_container:
+        #st.markdown(f"<div style='font-size: 24px;'><img src='{avatar}' style='width: 34px; height: 34px; border-radius: 50%; margin-bottom: 15px;'></div> {st.user.name} ({st.user.email})", unsafe_allow_html=True)
+
+        col1s, col2s, col3s, col4s = st.columns([0.1, 0.3, 0.4, 0.2], vertical_alignment="bottom")
+        with col1s:
+            if st.user.is_logged_in:
+                avatar = st.user.picture
+                st.markdown(f"<div style='font-size: 24px; margin-top: -22px;'><img src='{avatar}' style='width: 34px; height: 34px; border-radius: 50%; margin-bottom: 15px;'></div>", unsafe_allow_html=True)
+            else:
+                st.markdown(f"<div style='font-size: 24px; margin-top: -22px; margin-bottom: 15px;'>:material/account_circle:</div>", unsafe_allow_html=True)
+        with col2s:
+            #is_subscribed = is_email_subscribed_to_product(st.user.email)
+            #color = "red" if not is_subscribed else "green"
+            color = "grey"
+            if is_subscribed:
+                account_type = _lang["Premium (Paid)"]
+            else:
+                account_type = _lang["Free (Trial)"]
+            
+            st.markdown(f"<div style='margin-top: -22px;'>{st.user.name}</div>", unsafe_allow_html=True)
+            st.markdown(f"<div style='margin-top: -18px; color:{color}; font-size: 12px'>{account_type}</div>", unsafe_allow_html=True)
+        with col3s:
+            st.markdown("<a href='https://billing.stripe.com/p/login/7sY4gA2m110Vanb3Op0Fi00' target='_blank'>Manage Subscription</a>", unsafe_allow_html=True)
+            st.markdown(f"<div style='margin-top: -18px; color:{color}; font-size: 12px'>{st.user.email}</div>", unsafe_allow_html=True)
+        with col4s:
+            if st.button(_lang["Sign out"], key="sign_out", type="secondary"):
+                st.logout()
+
+    st.markdown("---")
+
+    if is_subscribed:
+        st.markdown(f"""**Thank You for Being a Valued Subscriber!**
+
+**Dear {st.user.name},**
+
+We want to extend our heartfelt thanks for placing your trust in Gods in White and the Corpus Analytica mission. Your subscription empowers us to continue building a platform where cutting-edge technology meets compassionate care.
+
+With your support, you have access to:
+
+- 🧠 Unlimited medical image analysis
+
+- 💬 Direct chat with expert AI doctors
+
+Your commitment helps us bring clarity, confidence, and convenience to healthcare—one image, one consultation, one life at a time.
+
+> *"Every subscriber strengthens our vision: to make expert medical guidance accessible to everyone, everywhere."* — Bernhard Z., Founder of Corpus Analytica
+
+Thank you for being part of this journey. We're honored to support yours.
+
+Warm regards, **The Corpus Analytica Team**
+            
+            """, unsafe_allow_html=True)
+    else:
+        st.markdown(f"""**You are a {account_type} subscriber.**
+            
+## :material/star: Unlock the Power of Expert Medical Insight
+
+**Dear {st.user.name},**
+
+Imagine having instant access to world-class physicians, AI-powered medical image analysis, and second opinions from specialists across the globe—all in one place.
+
+That's what Gods in White offers.
+
+By subscribing, you'll gain:
+
+- 🧠 Unlimited access to medical image analysis
+
+- 💬 Direct chat with expert AI doctors
+
+Whether you're seeking clarity, reassurance, or a deeper understanding of your health, our platform is built to support you—securely, intelligently, and compassionately.
+
+Join the movement toward smarter, more accessible healthcare. Your journey to peace of mind starts here.
+
+:material/lock_open: Upgrade to experience the future of digital health.
+
+            """, unsafe_allow_html=True)
+        add_auth(
+            required=False,  # Don't stop the app for non-subscribers
+            show_redirect_button=True,
+            subscription_button_text="Upgrade",
+            #button_color="#4CAF50",  # Green button
+            button_color="#cb785c",
+            use_sidebar=False  # Show button in main section
+        )
+
+        st.markdown("Warm regards, **The Corpus Analytica Team**", unsafe_allow_html=True)
+
+else:
+    st.markdown(_lang["Please login first"]) 
+    st.markdown("---")
+    st.stop()
