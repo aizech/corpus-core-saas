@@ -1,0 +1,250 @@
+# GodsinWhite Medical AI Platform
+
+<div align="center">
+  <img src="assets/godsinwhite_team_light.png" alt="GodsinWhite Team" width="400"/>
+  
+  **A specialized medical AI platform for healthcare professionals**
+  
+  [![Streamlit](https://img.shields.io/badge/Streamlit-1.48.0-FF4B4B.svg)](https://streamlit.io)
+  [![Python](https://img.shields.io/badge/Python-3.8+-blue.svg)](https://python.org)
+  [![License](https://img.shields.io/badge/License-Proprietary-red.svg)](LICENSE)
+</div>
+
+## 🏥 Overview
+
+GodsinWhite is a cutting-edge medical AI platform designed to assist healthcare professionals with AI-powered tools and expert consultation. Built with Streamlit, the platform provides a user-friendly interface for medical image analysis, expert chat consultations, and healthcare-focused AI assistance.
+
+### Key Features
+
+- **🔐 Secure Authentication**: OAuth integration with Google/Microsoft login
+- **💳 Premium Subscription**: Stripe-powered payment system with free trial
+- **🖼️ Medical Image Analysis**: AI-powered medical imaging tools
+- **💬 Expert Chat**: Premium consultation with AI medical experts
+- **🌍 Multi-language Support**: English and German localization
+- **🎨 Theme Support**: Light and dark mode themes
+- **📱 Responsive Design**: Mobile-friendly interface
+- **🔒 HIPAA Compliance**: Healthcare data privacy and security
+
+## 🚀 Quick Start
+
+### Prerequisites
+
+- Python 3.8 or higher
+- Streamlit account for authentication
+- Stripe account for payment processing (optional for development)
+
+### Installation
+
+1. **Clone the repository**
+   ```bash
+   git clone <repository-url>
+   cd stapp
+   ```
+
+2. **Create virtual environment**
+   ```bash
+   python -m venv venv
+   source venv/bin/activate  # On Windows: venv\Scripts\activate
+   ```
+
+3. **Install dependencies**
+   ```bash
+   pip install -r requirements.txt
+   ```
+
+4. **Configure environment**
+   ```bash
+   cp .streamlit/secrets-example.toml .streamlit/secrets.toml
+   cp .streamlit/config-example.toml .streamlit/config.toml
+   ```
+
+5. **Set up authentication and payment**
+   - Configure Auth0 credentials in `.streamlit/secrets.toml`
+   - Add Stripe API keys for payment processing
+   - Update configuration settings as needed
+
+6. **Run the application**
+   ```bash
+   streamlit run app.py
+   ```
+
+## 📁 Project Structure
+
+```
+stapp/
+├── assets/                     # Static assets and images
+│   ├── godsinwhite_logo_*.png  # Logo variants
+│   └── godsinwhite_team_*.png  # Team images
+├── locales/                    # Internationalization
+│   ├── en.py                   # English translations
+│   └── de.py                   # German translations
+├── pages/                      # Application pages
+│   ├── Home.py                 # Main dashboard
+│   ├── Medical_Image_Analysis.py # Medical imaging tools
+│   ├── Experts_Chat.py         # Premium chat feature
+│   ├── Account.py              # User account management
+│   ├── Pricing.py              # Subscription plans
+│   ├── Help.py                 # Help and support
+│   └── About.py                # About page
+├── .streamlit/                 # Streamlit configuration
+│   ├── config.toml             # App configuration
+│   └── secrets.toml            # API keys and secrets
+├── styles_*.css                # Theme stylesheets
+├── config.py                   # Application configuration
+├── app.py                    # Main application entry point
+└── requirements.txt            # Python dependencies
+```
+
+## 🔧 Configuration
+
+### Environment Variables
+
+Configure the following in `.streamlit/secrets.toml`:
+
+```toml
+# Authentication
+[auth0]
+domain = "your-auth0-domain"
+client_id = "your-client-id"
+client_secret = "your-client-secret"
+
+# Payment Processing
+stripe_api_key = "your-stripe-live-key"
+stripe_api_key_test = "your-stripe-test-key"
+testing_mode = false
+
+# Application Settings
+[general]
+company_name = "GodsinWhite"
+support_email = "ai@godsinwhite.com"
+```
+
+### Application Settings
+
+Modify `config.py` to customize:
+- Company information
+- Logo and asset paths
+- Application URLs
+- Agent configurations
+
+## 🎯 Features
+
+### Authentication & Authorization
+- OAuth 2.0 integration with Auth0
+- Support for Google and Microsoft login
+- Session management and user profiles
+- Premium subscription validation
+
+### Medical AI Tools
+- **Medical Image Analysis**: AI-powered diagnostic assistance
+- **Expert Consultation**: Premium chat with AI medical specialists
+- **Healthcare Analytics**: Data analysis and insights
+
+### User Experience
+- **Responsive Design**: Works on desktop and mobile devices
+- **Theme Support**: Light and dark mode options
+- **Internationalization**: English and German language support
+- **Accessibility**: WCAG compliant interface
+
+### Premium Features
+- Advanced medical image analysis
+- Expert chat consultations
+- Priority support
+- Extended usage limits
+
+## 💳 Subscription Management
+
+The platform uses Stripe for subscription management:
+
+- **Free Trial**: 14-day trial with basic features
+- **Premium Plan**: Full access to all medical AI tools
+- **Automatic Billing**: Recurring subscription management
+- **Usage Tracking**: Monitor API usage and limits
+
+## 🔒 Security & Compliance
+
+- **Data Encryption**: All data encrypted in transit and at rest
+- **HIPAA Compliance**: Healthcare data privacy standards
+- **Secure Authentication**: OAuth 2.0 with industry standards
+- **Audit Logging**: Comprehensive activity tracking
+- **Privacy Controls**: User data management and deletion
+
+## 🌍 Internationalization
+
+Currently supported languages:
+- **English** (en)
+- **German** (de)
+
+To add a new language:
+1. Create a new file in `locales/` (e.g., `fr.py`)
+2. Add translations following the existing format
+3. Update language selection in `login.py`
+
+## 🎨 Theming
+
+The application supports light and dark themes:
+- `styles_light.css` - Light theme styles
+- `styles_dark.css` - Dark theme styles
+- `styles_common.css` - Common styles for both themes
+
+Users can toggle themes using the theme switcher in the sidebar.
+
+## 🚀 Deployment
+
+### Local Development
+```bash
+streamlit run login.py
+```
+
+### Production Deployment
+1. Set up production environment variables
+2. Configure domain and SSL certificates
+3. Deploy using your preferred hosting platform
+4. Set up monitoring and logging
+
+### Docker Deployment
+```dockerfile
+FROM python:3.9-slim
+WORKDIR /app
+COPY requirements.txt .
+RUN pip install -r requirements.txt
+COPY . .
+EXPOSE 8501
+CMD ["streamlit", "run", "login.py"]
+```
+
+## 📊 Monitoring & Analytics
+
+- **User Analytics**: Track user engagement and feature usage
+- **Performance Monitoring**: Application performance metrics
+- **Error Tracking**: Comprehensive error logging
+- **Health Checks**: System status monitoring
+
+## 🤝 Contributing
+
+1. Fork the repository
+2. Create a feature branch (`git checkout -b feature/amazing-feature`)
+3. Commit your changes (`git commit -m 'Add amazing feature'`)
+4. Push to the branch (`git push origin feature/amazing-feature`)
+5. Open a Pull Request
+
+## 📝 License
+
+This project is proprietary software owned by GodsinWhite. All rights reserved.
+
+## 📞 Support
+
+- **Email**: ai@godsinwhite.com
+- **Website**: https://www.godsinwhite.com/
+- **Support Portal**: https://www.godsinwhite.com/support
+
+## 🏥 Medical Disclaimer
+
+This platform is designed to assist healthcare professionals and should not replace professional medical judgment. Always consult with qualified healthcare providers for medical decisions.
+
+---
+
+<div align="center">
+  <p><strong>Made with ❤️ by the GodsinWhite Team</strong></p>
+  <p>Empowering healthcare professionals with AI technology</p>
+</div>
