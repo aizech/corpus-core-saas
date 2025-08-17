@@ -8,7 +8,7 @@ serverPort = 8501
 # this will not show the full error traceback to the user
 #showErrorDetails = false
 # this will not hide the action menu completely
-toolbarMode = "minimal"
+#toolbarMode = "minimal"
 # this will hide the page names when building a multipage app.
 # this allows you to force navigation using st.switch_page and
 # preventing the user to hop on random pages via the sidebar
