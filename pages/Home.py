@@ -41,7 +41,7 @@ if st.user.is_logged_in:
         with col2a:
             st.markdown(f"""
             ## {_lang["Welcome to GodsinWhite"]}  
-            {_lang["GodsinWhite is a platform for creating, assembling and reusing AI-Agents and Tools for medical purposes."]}
+            {_lang["Gods in White is your personal gateway to advanced medical diagnostics—powered by AI and backed by real medical expertise. Designed for patients, healthcare professionals, and curious minds alike, this app transforms how medical images are analyzed and understood."]}
             """, unsafe_allow_html=True)
 
         st.markdown(f"{_lang['Nice to see you']}, {st.user.name}")

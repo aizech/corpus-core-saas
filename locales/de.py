@@ -10,7 +10,7 @@ translations = {
         "Pricing": "Preise",
         "Help": "Hilfe",
         "Welcome to GodsinWhite": "Willkommen bei GodsinWhite",
-        "GodsinWhite is a platform for creating, assembling and reusing AI-Agents and Tools for medical purposes.": "GodsinWhite ist eine Plattform für die Erstellung, Zusammenarbeit und Wiederverwendung von AI-Agenten und Tools für medizinische Zwecke.",
+        "Gods in White is your personal gateway to advanced medical diagnostics—powered by AI and backed by real medical expertise. Designed for patients, healthcare professionals, and curious minds alike, this app transforms how medical images are analyzed and understood.": "Gods in White ist Ihre persönliche Brücke zu fortschrittlichen medizinischen Diagnosen — gestützt von KI und echter medizinischer Expertise. Entworfen für Patienten, Ärzte und Neugierige verändert diese App die Art und Weise, wie medizinische Bilder analysiert und verstanden werden.",
         "Welcome to the Medical AI Platform": "Willkommen zur Medizin AI Plattform",
         "Login with your Google or Microsoft account": "Melden Sie sich mit Ihrem Google oder Microsoft-Konto an",
         "Login with Google": "Login mit Google",
