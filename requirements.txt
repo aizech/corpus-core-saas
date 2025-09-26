@@ -3,3 +3,4 @@ st_paywall
 streamlit
 stripe
 Authlib
+langfuse
