@@ -10,6 +10,41 @@ sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 from config import config
 
 
+def get_available_languages():
+    """Get all available languages from the locales directory."""
+    locales_dir = os.path.join(os.path.dirname(__file__), 'locales')
+    languages = []
+    
+    if os.path.exists(locales_dir):
+        for file in os.listdir(locales_dir):
+            if file.endswith('.py') and not file.startswith('__'):
+                lang_code = file[:-3]  # Remove .py extension
+                languages.append(lang_code)
+    
+    # Sort languages for consistent ordering
+    languages.sort()
+    return languages
+
+
+def get_language_display_names():
+    """Get display names for languages."""
+    display_names = {
+        'en': 'English',
+        'de': 'Deutsch',
+        'fr': 'Français',
+        'es': 'Español',
+        'it': 'Italiano',
+        'pt': 'Português',
+        'nl': 'Nederlands',
+        'ru': 'Русский',
+        'zh': '中文',
+        'ja': '日本語',
+        'ko': '한국어',
+        'ar': 'العربية'
+    }
+    return display_names
+
+
 # Set Stripe API key from secrets
 STRIPE_ENABLED = st.secrets.get("stripe_enabled", True)
 if STRIPE_ENABLED:
@@ -52,7 +87,7 @@ else:
 # Set page config
 icon_image = f"{config.LOGO_ICON_PATH}{st.session_state.theme}.png"
 st.set_page_config(
-    page_title="GodsinWhite Login", 
+    page_title=f"{config.APP_NAME} Login", 
     page_icon=icon_image,
     layout="centered",
     #initial_sidebar_state="collapsed"
@@ -73,7 +108,7 @@ with open("styles_common.css") as f:
 
 # Display GodsinWhite team image in sidebar above all pages
 #with st.sidebar:
-#    st.image(f"./assets/godsinwhite_team_{st.session_state.theme}.png", width=250)
+#    st.image(f"{config.LOGO_TEXT_PATH}{st.session_state.theme}.png", width=250)
 
 def is_email_subscribed_to_product(email):
     """
@@ -147,7 +182,7 @@ if not st.user.is_logged_in:
         col1, col2 = st.columns([1, 2])
         
         with col1:
-            st.image(f"assets/godsinwhite_team_{st.session_state.theme}.png", width=250)
+            st.image(f"{config.LOGO_TEAM_PATH}{st.session_state.theme}.png", width=250)
         with col2:
 
             st.markdown("""
@@ -235,7 +270,7 @@ else:
 
             # Display the current theme
             #st.write(f"Current Theme: {st.session_state.theme}")
-            #st.image(f"./assets/godsinwhite_team_{st.session_state.theme}.png", width=200)
+            #st.image(f"{config.LOGO_TEAM_PATH}{st.session_state.theme}.png", width=200)
 
             # Apply theme-specific styles with proper Streamlit element targeting
             if st.session_state.theme == "dark":
@@ -246,12 +281,31 @@ else:
                     st.markdown(f"<style>{f.read()}</style>", unsafe_allow_html=True)
 
         with col2t:
-            # Language selection
+            # Language selection - dynamically get available languages
+            available_languages = get_available_languages()
+            display_names = get_language_display_names()
+            
+            # Create format function that handles unknown languages gracefully
+            def format_language(lang_code):
+                return display_names.get(lang_code, lang_code.upper())
+            
+            # Ensure current language is in available languages, fallback to first available
+            current_lang = st.session_state.get('lang', 'en')
+            if current_lang not in available_languages and available_languages:
+                current_lang = available_languages[0]
+                st.session_state.lang = current_lang
+            
+            # Get current language index
+            try:
+                current_index = available_languages.index(current_lang) if current_lang in available_languages else 0
+            except (ValueError, IndexError):
+                current_index = 0
+            
             lang = st.selectbox(
                 "Language",
-                options=['en', 'de'],
-                format_func=lambda x: {'en': 'English', 'de': 'Deutsch'}[x],
-                index=(0 if st.session_state['lang'] == 'en' else 1),
+                options=available_languages,
+                format_func=format_language,
+                index=current_index,
                 label_visibility="collapsed"
             )
 
