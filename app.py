@@ -3,16 +3,22 @@ from st_paywall import add_auth
 import stripe
 import sys
 import os
+from langfuse import get_client
 
 # Add the parent directory to the path to import config
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 from config import config
 
+
 # Set Stripe API key from secrets
-if st.secrets.get("testing_mode", False):
-    stripe.api_key = st.secrets.get("stripe_api_key_test", "")
+STRIPE_ENABLED = st.secrets.get("stripe_enabled", True)
+if STRIPE_ENABLED:
+    if st.secrets.get("testing_mode", False):
+        stripe.api_key = st.secrets.get("stripe_api_key_test", "")
+    else:
+        stripe.api_key = st.secrets.get("stripe_api_key", "")
 else:
-    stripe.api_key = st.secrets.get("stripe_api_key", "")
+    stripe.api_key = None
 
 # Language selection
 # get browser language
@@ -70,10 +76,51 @@ with open("styles_common.css") as f:
 #    st.image(f"./assets/godsinwhite_team_{st.session_state.theme}.png", width=250)
 
 def is_email_subscribed_to_product(email):
-    for customer in stripe.Customer.list(email=email):
-        for subscription in stripe.Subscription.list(customer=customer['id']):
-            #if subscription['plan']['product'] == product:
-            return True
+    """
+    Check if an email is subscribed to any product.
+    Returns True if subscribed, False if not subscribed or if there's an API error.
+    """
+    # If Stripe is disabled, default to free tier
+    if not STRIPE_ENABLED or not stripe.api_key:
+        return False
+    
+    try:
+        # Try to list customers by email
+        customers = stripe.Customer.list(email=email, limit=10)
+        
+        for customer in customers.data:
+            try:
+                # Check if customer has any active subscriptions
+                subscriptions = stripe.Subscription.list(
+                    customer=customer['id'], 
+                    status='active',
+                    limit=10
+                )
+                
+                # If any active subscription exists, consider them subscribed
+                if subscriptions.data:
+                    return True
+                    
+            except stripe.error.StripeError as e:
+                # Log the error but continue checking other customers
+                st.error(f"Error checking subscriptions for customer {customer['id']}: {str(e)}")
+                continue
+                
+    except stripe.error.PermissionError:
+        # Handle permission errors gracefully
+        st.warning("Unable to verify subscription status due to API permissions. Defaulting to free tier.")
+        return False
+        
+    except stripe.error.StripeError as e:
+        # Handle other Stripe API errors
+        st.error(f"Stripe API error: {str(e)}")
+        return False
+        
+    except Exception as e:
+        # Handle any other unexpected errors
+        st.error(f"Unexpected error checking subscription: {str(e)}")
+        return False
+    
     return False
 
 

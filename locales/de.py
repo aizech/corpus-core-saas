@@ -49,7 +49,7 @@ translations = {
         "Whether you're seeking clarity, reassurance, or a deeper understanding of your health, our platform is built to support you—securely, intelligently, and compassionately.": "Ob Sie nach Klarheit, Sicherheit oder besserem Verständnis Ihrer Gesundheit suchen, unsere Plattform ist für Sie konzipiert - sicher, intelligent und mitfühlend.",
         "Join the movement toward smarter, more accessible healthcare. Your journey to peace of mind starts here." : "Unterstützen Sie eine Plattform, die intelligente und für jeden zugängliche Gesundheitsversorgung fördert. Ihre Reise beginnt hier.",
         "Upgrade to experience the future of digital health.": "Upgrade, um die Zukunft der digitalen Gesundheitsversorgung zu erleben.",
-        "Dear": "Sehr geehrte/r",
+        "Dear": "Hallo",
         "We want to extend our heartfelt thanks for placing your trust in Gods in White and the Corpus Analytica mission. Your subscription empowers us to continue building a platform where cutting-edge technology meets compassionate care.": "Wir möchten Ihnen mit unseren herzlichen Danken für Ihre Vertrauen in Gods in White und die Mission von Corpus Analytica ausdrücken. Ihre Abonnement ermöglicht uns, ein Plattform zu bauen, wo cutting-edge Technology mit compassionate Care zusammentritt.",
         "With your support, you have access to:": "Mit Ihrer Unterstützung haben Sie Zugang zu:",
         "Your commitment helps us bring clarity, confidence, and convenience to healthcare—one image, one consultation, one life at a time.": "Ihre Unterstützung hilft uns, Clarity, Confidence und Convenience zu bringen, die Gesundheitsversorgung—eine Bild, eine Beratung, eine Lebenszeit.",
