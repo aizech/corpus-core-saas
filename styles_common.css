@@ -4,6 +4,12 @@
 footer {
     visibility: hidden;
 }
+.stAppHeader {
+    display: none;
+}
+.stAppToolbar {
+    display: none;
+}
 .stAppDeployButton {
     visibility: hidden;
 }
