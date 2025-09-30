@@ -1,5 +1,34 @@
 import streamlit as st
+import os
 from config import config
+
+# Set page config
+icon_image = f"{config.LOGO_ICON_PATH}{st.session_state.theme}.png"
+st.set_page_config(
+    page_title="GodsinWhite Pricing", 
+    page_icon=icon_image,
+    #layout="wide",
+    #initial_sidebar_state="collapsed"
+)
+
+# Language selection
+# get browser language
+#st.write(f"Locale: {st.context.locale}")
+browser_language = st.session_state.get('browser_language', 'en')
+if 'lang' not in st.session_state:
+    st.session_state.lang = browser_language
+    lang = browser_language
+else:
+    lang = st.session_state.lang
+
+if lang == 'en':
+    from locales.en import translations
+elif lang == 'de':
+    from locales.de import translations
+
+_lang = translations[lang]
+
+
 
 # Page title
 one_cola = st.columns([1])[0]
@@ -11,27 +40,17 @@ with one_cola:
         st.image(f"assets/godsinwhite_team_{st.session_state.theme}.png", width=400)
         #st.image(team_image, width=400)
     with col2a:
-        st.markdown("""
-        ## Gods in White - AI-Powered Medical Imaging & Expert Insights  
-        *[A Corpus Analytica Innovation](https://www.corpusanalytica.com)*
+        st.markdown(f"""
+        ## {_lang['Help']}  
+        *[{_lang['A Corpus Analytica Innovation']}](https://www.corpusanalytica.com)*
         """, unsafe_allow_html=True)
     
-st.markdown("""
-Gods in White is your personal gateway to advanced medical diagnostics—powered by AI and backed by real medical expertise. Designed for patients, healthcare professionals, and curious minds alike, this app transforms how medical images are analyzed and understood.
+def read_locale_file(file_path):
+    with open(file_path, 'r', encoding='utf-8') as file:
+        content = file.read()
+    return content
 
-### :material/settings_heart: Key Features
-- Instant Image Analysis: Upload any medical image — X-rays, MRIs, CT scans or just take a picture with your phone — and receive fast, AI-driven insights with clinical-grade precision.
+file_path = os.path.join('locales', 'help.' + lang + '.md')
+locale_text = read_locale_file(file_path)
 
-- Expert Review On Demand: Get second opinions from real certified medical specialists who review your images and provide personalized feedback. Here we recommend our partners who are certified medical specialists from [Radiologic Reviews](https://www.radiologic-reviews.com).
-
-### :material/sell: Premium Access (for subscribed users)
-
-- Unlimited Image Uploads: No limits, no delays. Analyze as many images as you need.
-
-- Direct Chat with AI powered Doctors: Ask questions, share concerns, and receive expert guidance in real time.
-
-### :material/potted_plant: Why It Matters
-Whether you're seeking clarity, reassurance, or a second opinion, Gods in White empowers you to take control of your health journey—anytime, anywhere.
-
-> *"We created Gods in White to democratize access to medical expertise. Everyone deserves clarity when it comes to their health."* — Bernhard Z., Founder of [Corpus Analytica](https://www.corpusanalytica.com)
-""", unsafe_allow_html=True)
+st.markdown(locale_text, unsafe_allow_html=True)

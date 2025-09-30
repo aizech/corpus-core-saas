@@ -58,5 +58,14 @@ translations = {
         "Warm regards, **The Corpus Analytica Team**": "Warm regards, **The Corpus Analytica Team**",
         "Thank you for being part of this journey. We're honored to support yours.": "Thank you for being part of this journey. We're honored to support yours.",
         "Warm regards, **The Corpus Analytica Team**": "Warm regards, **The Corpus Analytica Team**",
+        "Free use for 14 days": "Free use for 14 days",
+        "Unlimited use": "Unlimited use",
+        "Medical Image Analysis": "Medical Image Analysis",
+        "AI doctor consultation": "AI doctor consultation",
+        "... many more features": "... many more features",
+        "Free": "Free",
+        "Premium": "Premium",
+        "A Corpus Analytica Innovation": "A Corpus Analytica Innovation",
+        "Help": "Help",
     }
 }

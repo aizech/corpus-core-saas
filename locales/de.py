@@ -55,6 +55,15 @@ translations = {
         "Your commitment helps us bring clarity, confidence, and convenience to healthcare—one image, one consultation, one life at a time.": "Ihre Unterstützung hilft uns, Clarity, Confidence und Convenience zu bringen, die Gesundheitsversorgung—eine Bild, eine Beratung, eine Lebenszeit.",
         "Every subscriber strengthens our vision: to make expert medical guidance accessible to everyone, everywhere.": "Jeder Abonnent stärkt unsere Vision: Expertenmedizinische Beratung zugänglich zu machen für jeden, überall.",
         "Thank you for being part of this journey. We're honored to support yours.": "Danke, dass Sie uns unterstützen!",
-        "Warm regards, **The Corpus Analytica Team**": "Mit freundlichen Grüßen, **Ihr Corpus Analytica Team**",
+        "Warm regards, **The Corpus Analytica Team**": "**Ihr Corpus Analytica Team**",
+        "Free use for 14 days": "Kostenlos für 14 Tage",
+        "Unlimited use": "Unbegrenzt",
+        "Medical Image Analysis": "Medizinische Bildanalyse",
+        "AI doctor consultation": "KI-Arzt Konsultation",
+        "... many more features": "... viele weitere Funktionen",
+        "Free": "Kostenlos",
+        "Premium": "Premium",
+        "A Corpus Analytica Innovation": "Eine Corpus Analytica Innovation",
+        "Help": "Hilfe",
     }
 }

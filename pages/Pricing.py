@@ -39,9 +39,9 @@ with one_cola:
         st.image(f"assets/godsinwhite_team_{st.session_state.theme}.png", width=400)
         #st.image(team_image, width=400)
     with col2a:
-        st.markdown("""
-        # Pricing Plans
-        """, unsafe_allow_html=True)
+        st.markdown(f"""
+            ## {_lang["Pricing"]}  
+            """, unsafe_allow_html=True)
 
 height = 50
 st.markdown(f'<div style="height: {height}px;"></div>', unsafe_allow_html=True)
@@ -51,11 +51,11 @@ st.markdown(f'<div style="height: {height}px;"></div>', unsafe_allow_html=True)
 plans = {
     "Free": {
         "price": 0.00,
-        "features": ["Free use for 14 days", "Medical Image Analysis", "&nbsp;", "&nbsp;"],
+        "features": [_lang["Free use for 14 days"], _lang["Medical Image Analysis"], "&nbsp;", "&nbsp;"],
     },
     "Premium": {
         "price": 9.99,
-        "features": ["Unlimited use", "Medical Image Analysis", "AI doctor consultation", "... many more features"],
+        "features": [_lang["Unlimited use"], _lang["Medical Image Analysis"], _lang["AI doctor consultation"], _lang["... many more features"]],
     },
 }
 
