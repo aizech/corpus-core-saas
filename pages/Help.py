@@ -5,7 +5,7 @@ from config import config
 # Set page config
 icon_image = f"{config.LOGO_ICON_PATH}{st.session_state.theme}.png"
 st.set_page_config(
-    page_title="GodsinWhite Pricing", 
+    page_title="GodsinWhite Help", 
     page_icon=icon_image,
     #layout="wide",
     #initial_sidebar_state="collapsed"
