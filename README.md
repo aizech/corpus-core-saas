@@ -132,36 +132,26 @@ Modify `config.py` to customize:
 - Session management and user profiles
 - Premium subscription validation
 
-### Medical AI Tools
-- **Medical Image Analysis**: AI-powered diagnostic assistance
-- **Expert Consultation**: Premium chat with AI medical specialists
-- **Healthcare Analytics**: Data analysis and insights
-
 ### User Experience
 - **Responsive Design**: Works on desktop and mobile devices
 - **Theme Support**: Light and dark mode options
 - **Internationalization**: English and German language support
 - **Accessibility**: WCAG compliant interface
 
-### Premium Features
-- Advanced medical image analysis
-- Expert chat consultations
-- Priority support
-- Extended usage limits
-
 ## 💳 Subscription Management
 
-The platform uses Stripe for subscription management:
+The platform uses Stripe for subscription management. There you can define your own plans and prices.  
+Here you can find the Stripe documentation: https://stripe.com/docs  
+Examples: 
 
 - **Free Trial**: 14-day trial with basic features
-- **Premium Plan**: Full access to all medical AI tools
+- **Premium Plan**: Full access to all premium features
 - **Automatic Billing**: Recurring subscription management
 - **Usage Tracking**: Monitor API usage and limits
 
 ## 🔒 Security & Compliance
 
 - **Data Encryption**: All data encrypted in transit and at rest
-- **HIPAA Compliance**: Healthcare data privacy standards
 - **Secure Authentication**: OAuth 2.0 with industry standards
 - **Audit Logging**: Comprehensive activity tracking
 - **Privacy Controls**: User data management and deletion
@@ -190,7 +180,7 @@ Users can toggle themes using the theme switcher in the sidebar.
 
 ### Local Development
 ```bash
-streamlit run login.py
+streamlit run app.py
 ```
 
 ### Production Deployment
@@ -207,7 +197,7 @@ COPY requirements.txt .
 RUN pip install -r requirements.txt
 COPY . .
 EXPOSE 8501
-CMD ["streamlit", "run", "login.py"]
+CMD ["streamlit", "run", "app.py"]
 ```
 
 ## 📊 Monitoring & Analytics
@@ -231,13 +221,9 @@ This project is proprietary software. All rights reserved.
 
 ## 📞 Support
 
-- **Email**: ai@godsinwhite.com
-- **Website**: https://www.godsinwhite.com/
-- **Support Portal**: https://www.godsinwhite.com/support
-
-## 🏥 Medical Disclaimer
-
-This platform is designed to assist healthcare professionals and should not replace professional medical judgment. Always consult with qualified healthcare providers for medical decisions.
+- **Email**: support@corpusanalytica.com
+- **Website**: https://www.corpusanalytica.com/
+- **Support Portal**: https://www.corpusanalytica.com/support
 
 ---
 
