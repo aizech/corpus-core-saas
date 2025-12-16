@@ -18,12 +18,9 @@ Corpus Core - SaaS is a Streamlit-based SaaS template with secure authentication
 
 - **🔐 Secure Authentication**: OAuth integration with Google/Microsoft login
 - **💳 Premium Subscription**: Stripe-powered payment system with free trial
-- **🖼️ Medical Image Analysis**: AI-powered medical imaging tools
-- **💬 Expert Chat**: Premium consultation with AI medical experts
 - **🌍 Multi-language Support**: English and German localization
 - **🎨 Theme Support**: Light and dark mode themes
 - **📱 Responsive Design**: Mobile-friendly interface
-- **🔒 HIPAA Compliance**: Healthcare data privacy and security
 
 ## 🚀 Quick Start
 
