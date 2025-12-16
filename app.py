@@ -87,10 +87,10 @@ else:
 # Set page config
 icon_image = f"{config.LOGO_ICON_PATH}{st.session_state.theme}.png"
 st.set_page_config(
-    page_title=f"{config.APP_NAME} Login", 
+    page_title=f"{config.APP_NAME}", 
     page_icon=icon_image,
     layout="centered",
-    #initial_sidebar_state="collapsed"
+    initial_sidebar_state="expanded"
 )
 
 # Logo in sidebar
@@ -106,7 +106,7 @@ st.logo(logo_image,
 with open("styles_common.css") as f:
     st.markdown(f"<style>{f.read()}</style>", unsafe_allow_html=True)
 
-# Display GodsinWhite team image in sidebar above all pages
+# Display CorpusCoreSaaS team image in sidebar above all pages
 #with st.sidebar:
 #    st.image(f"{config.LOGO_TEXT_PATH}{st.session_state.theme}.png", width=250)
 
@@ -159,58 +159,45 @@ def is_email_subscribed_to_product(email):
     return False
 
 
-# Add pages
-pages = [
-    st.Page(
-        "pages/Home.py",
-        title=_lang["Home"],
-        icon=":material/home:"
-    ),
-]
+def _build_pages(_lang, is_logged_in, is_subscribed):
+    pages = []
+    for page_def in config.PAGES:
+        access = page_def.get("access", "public")
+        if access == "public":
+            allowed = True
+        elif access == "logged_in":
+            allowed = is_logged_in
+        elif access == "subscribed":
+            allowed = is_logged_in and is_subscribed
+        else:
+            allowed = False
 
+        if not allowed:
+            continue
 
-if not st.user.is_logged_in:
-    main_container = st.container(
-        key="form",
-        border=True
-    )
+        title_key = page_def.get("title_key")
+        title = _lang.get(title_key, title_key)
 
-    with main_container:
-        
-    
-        # Center the content using columns
-        col1, col2 = st.columns([1, 2])
-        
-        with col1:
-            st.image(f"{config.LOGO_TEAM_PATH}{st.session_state.theme}.png", width=250)
-        with col2:
-
-            st.markdown("""
-            <p style="font-family: 'Roboto', sans-serif; font-size: 24px; font-weight: 300; line-height: 1.5; color: #333;">
-            We are <b>Gods in White</b>  
-            </p>
-            """, unsafe_allow_html=True)
-            st.markdown(_lang["Welcome to the Medical AI Platform"] + "<br>  " + _lang["Login with your Google or Microsoft account"] + "  ", unsafe_allow_html=True)
-    
-            # Create the login buttons
-            if st.button(_lang["Login or Sign up"], key="login_auth0", use_container_width=True, type="primary"):
-                st.login(provider="auth0")
-            #if st.button(_lang["Login with Microsoft"], key="microsoft_login", use_container_width=True, type="secondary"):
-            #    st.login(provider="auth0")
-
-            st.markdown("<br>  <font size='2'>" + _lang["By clicking, you agree to our Terms of Service and Privacy Policy."] + "</font>", unsafe_allow_html=True)
-
-else:
-    with st.sidebar:
         pages.append(
             st.Page(
-                "pages/Medical_Image_Analysis.py",
-                title=_lang["Medical Image Analysis"],
-                icon=":material/diagnosis:"
-            ),
+                page_def["path"],
+                title=title,
+                icon=page_def.get("icon"),
+                url_path=page_def.get("url_path"),
+            )
         )
+    return pages
 
+
+# Add pages
+pages = _build_pages(_lang, st.user.is_logged_in, False)
+
+
+if st.user.is_logged_in:
+    with st.sidebar:
         is_subscribed = is_email_subscribed_to_product(st.user.email)
+
+        pages = _build_pages(_lang, st.user.is_logged_in, is_subscribed)
         if not is_subscribed:
             col1p = st.columns([1], vertical_alignment="center", border=True)[0]
             with col1p:
@@ -317,49 +304,6 @@ else:
                 from locales.de import translations
 
             _lang = translations[st.session_state.lang]
-
-        # Add pages
-        if is_subscribed:
-            pages.append(
-                st.Page(
-                    "pages/Experts_Chat.py",
-                    title=_lang["Experts Chat"],
-                    icon=":material/chat:"
-                )
-            )
-        
-        if st.user.is_logged_in:
-            pages.append(
-                st.Page(
-                    "pages/Account.py",
-                    title=_lang["Account"],
-                    icon=":material/account_circle:"
-                )
-            )
-
-        if not is_subscribed:
-            pages.append(
-                st.Page(
-                    "pages/Pricing.py",
-                    title=_lang["Pricing"],
-                    icon=":material/sell:"
-                )
-            )
-            
-        pages.append(
-            st.Page(
-                "pages/Help.py",
-                title=_lang["Help"],
-                icon=":material/help:"
-            )
-        )
-        pages.append(
-            st.Page(
-                "pages/About.py",
-                title=_lang["About"],
-                icon=":material/info:"
-            )
-        )
 
 page = st.navigation(pages)
 page.run()

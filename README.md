@@ -1,9 +1,9 @@
-# GodsinWhite Medical AI Platform
+# Corpus Core - SaaS
 
 <div align="center">
-  <img src="assets/godsinwhite_team_light.png" alt="GodsinWhite Team" width="400"/>
+  <img src="assets/godsinwhite_team_light.png" alt="Corpus Core - SaaS" width="400"/>
   
-  **A specialized medical AI platform for healthcare professionals**
+  **A reusable Streamlit SaaS template**
   
   [![Streamlit](https://img.shields.io/badge/Streamlit-1.48.0-FF4B4B.svg)](https://streamlit.io)
   [![Python](https://img.shields.io/badge/Python-3.8+-blue.svg)](https://python.org)
@@ -12,7 +12,7 @@
 
 ## 🏥 Overview
 
-GodsinWhite is a cutting-edge medical AI platform designed to assist healthcare professionals with AI-powered tools and expert consultation. Built with Streamlit, the platform provides a user-friendly interface for medical image analysis, expert chat consultations, and healthcare-focused AI assistance.
+Corpus Core - SaaS is a Streamlit-based SaaS template with secure authentication and Stripe-backed subscriptions. It includes example pages and feature gating patterns you can reuse across projects.
 
 ### Key Features
 
@@ -38,7 +38,7 @@ GodsinWhite is a cutting-edge medical AI platform designed to assist healthcare 
 1. **Clone the repository**
    ```bash
    git clone <repository-url>
-   cd stapp
+   cd corpus_core_saas
    ```
 
 2. **Create virtual environment**
@@ -71,7 +71,7 @@ GodsinWhite is a cutting-edge medical AI platform designed to assist healthcare 
 ## 📁 Project Structure
 
 ```
-stapp/
+corpus_core_saas/
 ├── assets/                     # Static assets and images
 │   ├── godsinwhite_logo_*.png  # Logo variants
 │   └── godsinwhite_team_*.png  # Team images
@@ -115,7 +115,7 @@ testing_mode = false
 
 # Application Settings
 [general]
-company_name = "GodsinWhite"
+company_name = "Corpus Core - SaaS"
 support_email = "ai@godsinwhite.com"
 ```
 
@@ -230,7 +230,7 @@ CMD ["streamlit", "run", "login.py"]
 
 ## 📝 License
 
-This project is proprietary software owned by GodsinWhite. All rights reserved.
+This project is proprietary software. All rights reserved.
 
 ## 📞 Support
 
@@ -245,6 +245,6 @@ This platform is designed to assist healthcare professionals and should not repl
 ---
 
 <div align="center">
-  <p><strong>Made with ❤️ by the GodsinWhite Team</strong></p>
-  <p>Empowering healthcare professionals with AI technology</p>
+  <p><strong>Corpus Core - SaaS</strong></p>
+  <p>A reusable SaaS template built with Streamlit</p>
 </div>

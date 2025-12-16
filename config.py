@@ -1,13 +1,13 @@
 from pathlib import Path
 
 class Config:
-    COMPANY = "GodsinWhite"
+    COMPANY = "CorpusCoreSaaS"
     COMPANY_URL = "https://www.godsinwhite.com/"
 
     SUPPORT_URL = "https://www.godsinwhite.com/support"
 
     # --- Constants & Directories ---
-    APP_NAME      = "GodsinWhite"
+    APP_NAME      = "Corpus Core - SaaS"
     APP_ICON      = ":material/smart_toy:"
     APP_URL       = "https://www.godsinwhite.com/"
     CONTACT_EMAIL = "ai@godsinwhite.com"
@@ -17,7 +17,66 @@ class Config:
     #CSS_FILE      = THIS_DIR / "styles" / "custom.css"
     ASSETS_DIR    = THIS_DIR / "assets"
     
-    APP_DESCRIPTION = "GodsinWhite is an AI interface for orchestrating multiple AI Agents and Teams of AI Agents in the medical field"
+    APP_DESCRIPTION = "Corpus Core - SaaS is a reusable Streamlit SaaS template with authentication, subscriptions, and page-level access control"
+
+    PAGES = [
+        {
+            "path": "pages/Home.py",
+            "title_key": "Home",
+            "icon": ":material/home:",
+            "access": "public",
+        },
+        {
+            "path": "pages/Terms_of_Service.py",
+            "title_key": "Terms of Service",
+            "icon": ":material/gavel:",
+            "access": "public",
+            "url_path": "terms-of-service",
+        },
+        {
+            "path": "pages/Privacy_Policy.py",
+            "title_key": "Privacy Policy",
+            "icon": ":material/privacy_tip:",
+            "access": "public",
+            "url_path": "privacy-policy",
+        },
+        {
+            "path": "pages/Medical_Image_Analysis.py",
+            "title_key": "Medical Image Analysis",
+            "icon": ":material/diagnosis:",
+            "access": "logged_in",
+        },
+        {
+            "path": "pages/Experts_Chat.py",
+            "title_key": "Experts Chat",
+            "icon": ":material/chat:",
+            "access": "subscribed",
+        },
+        {
+            "path": "pages/Account.py",
+            "title_key": "Account",
+            "icon": ":material/account_circle:",
+            "access": "logged_in",
+        },
+        {
+            "path": "pages/Pricing.py",
+            "title_key": "Pricing",
+            "icon": ":material/sell:",
+            "access": "logged_in",
+        },
+        {
+            "path": "pages/Help.py",
+            "title_key": "Help",
+            "icon": ":material/help:",
+            "access": "public",
+        },
+        {
+            "path": "pages/About.py",
+            "title_key": "About",
+            "icon": ":material/info:",
+            "access": "public",
+        },
+    ]
 
     MENU_ITEMS = {
         'Get Help': f"{APP_URL}/help",

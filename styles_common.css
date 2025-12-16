@@ -5,10 +5,10 @@ footer {
     visibility: hidden;
 }
 .stAppHeader {
-    display: none;
+    display: block;
 }
 .stAppToolbar {
-    display: none;
+    display: block;
 }
 .stAppDeployButton {
     visibility: hidden;

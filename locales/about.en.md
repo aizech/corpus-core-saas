@@ -1,19 +1,12 @@
-# Corpus Analytica - Your Trusted Partner
+# Corpus Core - SaaS
 
-At [Corpus Analytica](https://www.corpusanalytica.com), we redefine how medical professionals and patients connect—through a platform built for simplicity, security, and global reach.
+Corpus Core - SaaS is a reusable Streamlit SaaS starter focused on authentication, subscription gating, and a clean multi-page structure.
 
-#### What We Offer:
-- Seamless Connections: We unite doctors, specialists, and patients through our cutting-edge digital platform.
+#### What This Template Includes:
+- Authentication (login/logout) wiring
+- Subscription checks (Stripe) and paywall UX
+- Page-level access rules (public / logged_in / subscribed)
+- Internationalization and theming scaffolding
 
-- Expert Second Opinions: Gain easy access to a network of certified physicians and specialists for reliable second opinions.
-
-- Effortless Booking: Our intuitive interface makes requesting and scheduling consultations fast and frustration-free.
-
-- Global Access: Wherever you are, our online consultations bring expert medical advice right to your screen.
-
-- Data You Can Trust: We uphold the highest standards in data protection and patient privacy—because your health deserves nothing less.
-
-#### Experience Healthcare in a New Dimension
-Your health is invaluable. With Corpus Analytica, discover a smarter, safer, and more connected way to care.
-
-> *"Healthcare should be accessible, transparent, and empowering. At Corpus Analytica, we're building more than just a platform — we're building trust."* — Bernhard Z., Founder of [Corpus Analytica](https://www.corpusanalytica.com)
+#### Next Steps
+Replace the texts, logos, and domain settings in `config.py` and the locale markdown files to match your SaaS product.
