@@ -2,5 +2,5 @@ python-dotenv
 st_paywall
 streamlit
 stripe
-Authlib
+Authlib==1.3.2
 langfuse
