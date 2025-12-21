@@ -18,4 +18,4 @@ elif lang == 'de':
 _lang = translations[lang]
 
 
-st.markdown("# " + _lang["Medical Image Analysis"])
+st.markdown("# " + _lang["Premium Content"])

@@ -51,11 +51,11 @@ st.markdown(f'<div style="height: {height}px;"></div>', unsafe_allow_html=True)
 plans = {
     "Free": {
         "price": 0.00,
-        "features": [_lang["Free use for 14 days"], _lang["Medical Image Analysis"], "&nbsp;", "&nbsp;"],
+        "features": [_lang["Free use for 14 days"], _lang["Premium"], "&nbsp;", "&nbsp;"],
     },
     "Premium": {
-        "price": 9.99,
-        "features": [_lang["Unlimited use"], _lang["Medical Image Analysis"], _lang["AI doctor consultation"], _lang["... many more features"]],
+        "price": 15.00,
+        "features": [_lang["Unlimited use"], _lang["Premium"], _lang["AI doctor consultation"], _lang["... many more features"]],
     },
 }
 
@@ -66,13 +66,13 @@ with col1:
     st.markdown("### " + f"{plans[plan_names[0]]['price']} EUR")
     features = "<br>".join([f"{feature}" for feature in plans[plan_names[0]]["features"]])
     st.markdown(features, unsafe_allow_html=True)
-    add_auth(
-        required=False,  # Don't stop the app for non-subscribers
-        show_redirect_button=True,
-        subscription_button_text=_lang["Upgrade"],
-        button_color="#cb785c",  # Green button
-        use_sidebar=False  # Show button in main section
-    )
+    #add_auth(
+    #    required=False,  # Don't stop the app for non-subscribers
+    #    show_redirect_button=True,
+    #    subscription_button_text=_lang["Upgrade"],
+    #    button_color="#cb785c",  # Green button
+    #    use_sidebar=False  # Show button in main section
+    #)
 
 with col2:
     #st.markdown(":blue-badge[most popular]")

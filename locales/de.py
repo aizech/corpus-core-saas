@@ -29,7 +29,6 @@ translations = {
         "Privacy Policy": "Datenschutzrichtlinien",
         "Home": "Home",
         "Language": "Sprache",
-        "Medical Image Analysis": "Medizinische Bildanalyse",
         "Upgrade to Premium": "Upgrade auf Premium",
         "Get 14 days free and unlock all Premium features.": "Erhalten Sie 14 Tage kostenlos und schalten Sie alle Premium-Funktionen frei.",
         "Account Type": "Konto-Typ",

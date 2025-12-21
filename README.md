@@ -16,7 +16,7 @@ Corpus Core - SaaS is a Streamlit-based SaaS template with secure authentication
 
 ### Key Features
 
-- **🔐 Secure Authentication**: OAuth integration with Google/Microsoft login
+- **🔐 Secure Authentication**: OAuth integration with Google/Microsoft/GitHub login
 - **💳 Premium Subscription**: Stripe-powered payment system with free trial
 - **🌍 Multi-language Support**: English and German localization
 - **🎨 Theme Support**: Light and dark mode themes
@@ -34,8 +34,8 @@ Corpus Core - SaaS is a Streamlit-based SaaS template with secure authentication
 
 1. **Clone the repository**
    ```bash
-   git clone <repository-url>
-   cd corpus_core_saas
+   git clone https://github.com/aizech/corpus-core-saas.git
+   cd corpus-core-saas
    ```
 
 2. **Create virtual environment**
@@ -68,7 +68,7 @@ Corpus Core - SaaS is a Streamlit-based SaaS template with secure authentication
 ## 📁 Project Structure
 
 ```
-corpus_core_saas/
+corpus-core-saas/
 ├── assets/                     # Static assets and images
 │   ├── godsinwhite_logo_*.png  # Logo variants
 │   └── godsinwhite_team_*.png  # Team images
@@ -77,8 +77,8 @@ corpus_core_saas/
 │   └── de.py                   # German translations
 ├── pages/                      # Application pages
 │   ├── Home.py                 # Main dashboard
-│   ├── Medical_Image_Analysis.py # Medical imaging tools
-│   ├── Experts_Chat.py         # Premium chat feature
+│   ├── Trial.py                # Trial page
+│   ├── Premium.py              # Premium page
 │   ├── Account.py              # User account management
 │   ├── Pricing.py              # Subscription plans
 │   ├── Help.py                 # Help and support
@@ -113,7 +113,7 @@ testing_mode = false
 # Application Settings
 [general]
 company_name = "Corpus Core - SaaS"
-support_email = "ai@godsinwhite.com"
+support_email = "support@corpusanalytica.com"
 ```
 
 ### Application Settings
@@ -128,7 +128,7 @@ Modify `config.py` to customize:
 
 ### Authentication & Authorization
 - OAuth 2.0 integration with Auth0
-- Support for Google and Microsoft login
+- Support for Google, Microsoft and GitHub login
 - Session management and user profiles
 - Premium subscription validation
 
@@ -229,5 +229,5 @@ This project is proprietary software. All rights reserved.
 
 <div align="center">
   <p><strong>Corpus Core - SaaS</strong></p>
-  <p>A reusable SaaS template built with Streamlit</p>
+  <p>A reusable SaaS template by Corpus Analytica</p>
 </div>

@@ -2,15 +2,15 @@ from pathlib import Path
 
 class Config:
     COMPANY = "CorpusCoreSaaS"
-    COMPANY_URL = "https://www.godsinwhite.com/"
+    COMPANY_URL = "https://www.corpusanalytica.com/"
 
-    SUPPORT_URL = "https://www.godsinwhite.com/support"
+    SUPPORT_URL = "https://www.corpusanalytica.com/support"
 
     # --- Constants & Directories ---
     APP_NAME      = "Corpus Core - SaaS"
     APP_ICON      = ":material/smart_toy:"
-    APP_URL       = "https://www.godsinwhite.com/"
-    CONTACT_EMAIL = "ai@godsinwhite.com"
+    APP_URL       = "https://www.corpusanalytica.com/"
+    CONTACT_EMAIL = "support@corpusanalytica.com"
 
     THIS_DIR      = Path(__file__).parent
     #STYLES_DIR    = THIS_DIR / "styles"
@@ -41,14 +41,14 @@ class Config:
             "url_path": "privacy-policy",
         },
         {
-            "path": "pages/Medical_Image_Analysis.py",
-            "title_key": "Medical Image Analysis",
+            "path": "pages/Trial.py",
+            "title_key": "Trial",
             "icon": ":material/diagnosis:",
             "access": "logged_in",
         },
         {
-            "path": "pages/Experts_Chat.py",
-            "title_key": "Experts Chat",
+            "path": "pages/Premium.py",
+            "title_key": "Premium",
             "icon": ":material/chat:",
             "access": "subscribed",
         },
