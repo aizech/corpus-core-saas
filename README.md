@@ -14,6 +14,8 @@
 
 Corpus Core - SaaS is a Streamlit-based SaaS template with secure authentication and Stripe-backed subscriptions. It includes example pages and feature gating patterns you can reuse across projects.
 
+See it live in action here: https://corpus-core.streamlit.app/
+
 ### Key Features
 
 - **🔐 Secure Authentication**: OAuth integration with Google/Microsoft/GitHub login
