@@ -27,20 +27,6 @@ class Config:
             "access": "public",
         },
         {
-            "path": "pages/Terms_of_Service.py",
-            "title_key": "Terms of Service",
-            "icon": ":material/gavel:",
-            "access": "public",
-            "url_path": "terms-of-service",
-        },
-        {
-            "path": "pages/Privacy_Policy.py",
-            "title_key": "Privacy Policy",
-            "icon": ":material/privacy_tip:",
-            "access": "public",
-            "url_path": "privacy-policy",
-        },
-        {
             "path": "pages/Trial.py",
             "title_key": "Trial",
             "icon": ":material/diagnosis:",
@@ -63,6 +49,20 @@ class Config:
             "title_key": "Pricing",
             "icon": ":material/sell:",
             "access": "logged_in",
+        },
+        {
+            "path": "pages/Terms_of_Service.py",
+            "title_key": "Terms of Service",
+            "icon": ":material/gavel:",
+            "access": "public",
+            "url_path": "terms-of-service",
+        },
+        {
+            "path": "pages/Privacy_Policy.py",
+            "title_key": "Privacy Policy",
+            "icon": ":material/privacy_tip:",
+            "access": "public",
+            "url_path": "privacy-policy",
         },
         {
             "path": "pages/Help.py",

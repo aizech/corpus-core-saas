@@ -51,7 +51,8 @@ st.markdown(f'<div style="height: {height}px;"></div>', unsafe_allow_html=True)
 plans = {
     "Free": {
         "price": 0.00,
-        "features": [_lang["Free use for 14 days"], _lang["Premium"], "&nbsp;", "&nbsp;"],
+        #"features": [_lang["Free use for 14 days"], _lang["Premium"], "&nbsp;", "&nbsp;"],
+        "features": [_lang["Trial Content"], "&nbsp;", "&nbsp;", "&nbsp;"],
     },
     "Premium": {
         "price": 15.00,

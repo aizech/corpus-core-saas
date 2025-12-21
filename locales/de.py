@@ -63,6 +63,7 @@ translations = {
         "Free": "Kostenlos",
         "Premium": "Premium",
         "Trial Content": "Trial Inhalt",
+        "Premium Content": "Premium Inhalt",
         "A Corpus Analytica Innovation": "Eine Corpus Analytica Innovation",
         "Help": "Hilfe",
     }
