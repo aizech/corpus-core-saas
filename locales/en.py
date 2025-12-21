@@ -61,10 +61,10 @@ translations = {
         "Unlimited use": "Unlimited use",
         "AI doctor consultation": "AI doctor consultation",
         "... many more features": "... many more features",
-        "Free": "Free",
-        "Premium": "Premium",
         "Trial Content": "Trial Content",
         "Premium Content": "Premium Content",
+        "Free": "Free",
+        "Premium": "Premium",
         "A Corpus Analytica Innovation": "A Corpus Analytica Innovation",
         "Help": "Help",
     }

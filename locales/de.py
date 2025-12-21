@@ -60,10 +60,10 @@ translations = {
         "Medical Image Analysis": "Medizinische Bildanalyse",
         "AI doctor consultation": "KI-Arzt Konsultation",
         "... many more features": "... viele weitere Funktionen",
-        "Free": "Kostenlos",
-        "Premium": "Premium",
         "Trial Content": "Trial Inhalt",
         "Premium Content": "Premium Inhalt",
+        "Free": "Kostenlos",
+        "Premium": "Premium",
         "A Corpus Analytica Innovation": "Eine Corpus Analytica Innovation",
         "Help": "Hilfe",
     }
