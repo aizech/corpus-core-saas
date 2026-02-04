@@ -234,7 +234,7 @@ if st.user.is_logged_in:
             st.markdown(f"<a href='{account_page}' style='text-decoration: none;' target='_self'><div style='margin-top: 15px;'>{st.user.name}</div></a>", unsafe_allow_html=True)
             st.markdown(f"<div style='margin-top: -22px; color:{color}; font-size: 12px'>{account_type}</div>", unsafe_allow_html=True)
 
-        if st.button(f":material/logout: {_lang['Sign out']}", use_container_width=True, type="secondary"):
+        if st.button(f":material/logout: {_lang['Sign out']}", width="stretch", type="secondary"):
             st.logout()
             st.rerun()
             
