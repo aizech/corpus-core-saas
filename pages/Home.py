@@ -68,7 +68,7 @@ else:
             """, unsafe_allow_html=True)
             st.markdown(_lang["Welcome to the Corpus Analytica Platform"] + "<br>  " + _lang["Login with your Google or Microsoft account"] + "  ", unsafe_allow_html=True)
 
-            if st.button(_lang["Login or Sign up"], key="login_auth0", use_container_width=True, type="primary"):
+            if st.button(_lang["Login or Sign up"], key="login_auth0", width="stretch", type="primary"):
                 st.login(provider="auth0")
 
             st.markdown("<br>  <font size='2'>" + _lang["By clicking, you agree to our Terms of Service and Privacy Policy."] + "</font>", unsafe_allow_html=True)
