@@ -10,23 +10,23 @@ st.set_page_config(
 )
 
 # Language selection
-browser_language = st.session_state.get('browser_language', 'en')
-if 'lang' not in st.session_state:
+browser_language = st.session_state.get("browser_language", "en")
+if "lang" not in st.session_state:
     st.session_state.lang = browser_language
     lang = browser_language
 else:
     lang = st.session_state.lang
 
-if lang == 'en':
+if lang == "en":
     from locales.en import translations
-elif lang == 'de':
+elif lang == "de":
     from locales.de import translations
 
 _lang = translations[lang]
 
 st.markdown(f"# {_lang['Privacy Policy']}")
 
-if lang == 'de':
+if lang == "de":
     st.markdown("""
 Dieses Dokument ist eine **Vorlage**. Ersetze den Inhalt durch deine eigene Datenschutzerklärung.
 
