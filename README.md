@@ -128,35 +128,46 @@ Modify `config.py` to customize:
 
 ## 🎯 Features
 
-### Authentication & Authorization
-- OAuth 2.0 integration with Auth0
-- Support for Google, Microsoft and GitHub login
-- Session management and user profiles
-- Premium subscription validation
+### 📊 Feature Comparison
 
-### User Experience
-- **Responsive Design**: Works on desktop and mobile devices
-- **Theme Support**: Light and dark mode options
+| Feature | Free Tier | Premium Tier | Enterprise |
+|---------|-----------|--------------|------------|
+| **Authentication** | Google/Microsoft/GitHub OAuth | ✅ All OAuth providers | ✅ Custom SSO |
+| **User Management** | Up to 3 users | Unlimited users | Unlimited + SAML |
+| **Core Features** | Basic functionality | All premium features | Custom features |
+| **API Access** | Limited | Full API access | Priority API |
+| **Support** | Community | Email support | Dedicated support |
+| **Customization** | Basic themes | Full theming | White-label |
+| **Storage** | 1GB | 100GB | Unlimited |
+| **Analytics** | Basic metrics | Advanced analytics | Custom reports |
+
+### 🔐 Authentication & Authorization
+- **OAuth 2.0 Integration**: Auth0-powered secure authentication
+- **Multiple Providers**: Google, Microsoft, GitHub login options
+- **Session Management**: Secure token handling and automatic refresh
+- **Role-Based Access**: Premium subscription validation and feature gating
+- **Security Compliance**: Industry-standard OAuth implementation
+
+### 🎨 User Experience
+- **Responsive Design**: Optimized for desktop, tablet, and mobile devices
+- **Theme Support**: Light and dark mode with smooth transitions
 - **Internationalization**: English and German language support
-- **Accessibility**: WCAG compliant interface
+- **Accessibility**: WCAG 2.1 compliant interface components
+- **Progressive Enhancement**: Works without JavaScript, enhanced with it
 
-## 💳 Subscription Management
+### 💳 Subscription Management
+- **Stripe Integration**: Secure payment processing with multiple currencies
+- **Flexible Plans**: Free trial, premium monthly/annual subscriptions
+- **Automatic Billing**: Recurring subscription management with dunning
+- **Usage Tracking**: Monitor API usage, storage, and active users
+- **Upgrade/Downgrade**: Seamless plan changes with prorated billing
 
-The platform uses Stripe for subscription management. There you can define your own plans and prices.  
-Here you can find the Stripe documentation: https://stripe.com/docs  
-Examples: 
-
-- **Free Trial**: 14-day trial with basic features
-- **Premium Plan**: Full access to all premium features
-- **Automatic Billing**: Recurring subscription management
-- **Usage Tracking**: Monitor API usage and limits
-
-## 🔒 Security & Compliance
-
-- **Data Encryption**: All data encrypted in transit and at rest
-- **Secure Authentication**: OAuth 2.0 with industry standards
-- **Audit Logging**: Comprehensive activity tracking
-- **Privacy Controls**: User data management and deletion
+### 🔒 Security & Compliance
+- **Data Encryption**: AES-256 encryption at rest and TLS 1.3 in transit
+- **Secure Authentication**: OAuth 2.0 with PKCE and state validation
+- **Audit Logging**: Comprehensive activity tracking and security events
+- **Privacy Controls**: GDPR-compliant data management and user rights
+- **Regular Security Updates**: Automated dependency scanning and updates
 
 ## 🌍 Internationalization
 
@@ -180,26 +191,272 @@ Users can toggle themes using the theme switcher in the sidebar.
 
 ## 🚀 Deployment
 
+### 📸 Deployment Screenshots
+
+#### Login & Authentication
+```
+┌─────────────────────────────────────┐
+│  🏥 Corpus Core - SaaS              │
+│  ┌─────────────────────────────────┐ │
+│  │   Sign in with Google          │ │
+│  │   Sign in with Microsoft       │ │
+│  │   Sign in with GitHub          │ │
+│  └─────────────────────────────────┘ │
+│                                     │
+│  New to Corpus Core? Start Trial → │
+└─────────────────────────────────────┘
+```
+
+#### Premium Dashboard
+```
+┌─────────────────────────────────────┐
+│  📊 Dashboard                      │
+│  ┌─────┐ ┌─────┐ ┌─────┐ ┌─────┐   │
+│  │Users│ │Usage│ │Revenue│ │Support│ │
+│  │ 156 │ │892GB│ │$4,291│ │  12   │ │
+│  └─────┘ └─────┘ └─────┘ └─────┘   │
+│                                     │
+│  📈 Usage Analytics                 │
+│  ██████████░░░░ 89% of 1TB          │
+└─────────────────────────────────────┘
+```
+
+#### Account Management
+```
+┌─────────────────────────────────────┐
+│  👤 Account Settings                │
+│                                     │
+│  📧 Email: user@example.com         │
+│  💳 Plan: Premium ($29/mo)          │
+│  📅 Member since: Jan 15, 2024      │
+│                                     │
+│  ┌─────────────────────────────────┐ │
+│  │   Upgrade to Enterprise         │ │
+│  │   Download Invoice (PDF)        │ │
+│  │   Cancel Subscription            │ │
+│  └─────────────────────────────────┘ │
+└─────────────────────────────────────┘
+```
+
 ### Local Development
+
 ```bash
+# Start development server
 streamlit run app.py
+
+# Access at http://localhost:8501
+# Uses .streamlit/secrets-example.toml by default
 ```
 
 ### Production Deployment
-1. Set up production environment variables
-2. Configure domain and SSL certificates
-3. Deploy using your preferred hosting platform
-4. Set up monitoring and logging
 
-### Docker Deployment
+#### Option 1: Streamlit Cloud (Recommended)
+1. **Connect Repository**
+   - Link GitHub repository to Streamlit Cloud
+   - Configure build command: `streamlit run app.py`
+
+2. **Environment Setup**
+   ```toml
+   # In Streamlit Cloud secrets
+   [auth0]
+   domain = "your-auth0-domain"
+   client_id = "your-client-id"
+   client_secret = "your-client-secret"
+   
+   stripe_api_key = "sk_live_..."
+   testing_mode = false
+   ```
+
+3. **Deploy**
+   - Automatic deployment on git push
+   - Custom domain: `https://your-app.streamlit.app`
+   - SSL certificate included
+
+#### Option 2: Docker Deployment
+
 ```dockerfile
+# Dockerfile
 FROM python:3.9-slim
+
 WORKDIR /app
+
+# Install system dependencies
+RUN apt-get update && apt-get install -y \
+    build-essential \
+    && rm -rf /var/lib/apt/lists/*
+
+# Install Python dependencies
 COPY requirements.txt .
-RUN pip install -r requirements.txt
+RUN pip install --no-cache-dir -r requirements.txt
+
+# Copy application
 COPY . .
+
+# Create non-root user
+RUN useradd -m -u 1000 appuser && chown -R appuser:appuser /app
+USER appuser
+
 EXPOSE 8501
-CMD ["streamlit", "run", "app.py"]
+
+# Health check
+HEALTHCHECK --interval=30s --timeout=30s --start-period=5s --retries=3 \
+    CMD curl -f http://localhost:8501/_stcore/health || exit 1
+
+CMD ["streamlit", "run", "app.py", "--server.address=0.0.0.0"]
+```
+
+```yaml
+# docker-compose.yml
+version: '3.8'
+
+services:
+  corpus-core:
+    build: .
+    ports:
+      - "8501:8501"
+    environment:
+      - AUTH0_DOMAIN=${AUTH0_DOMAIN}
+      - AUTH0_CLIENT_ID=${AUTH0_CLIENT_ID}
+      - AUTH0_CLIENT_SECRET=${AUTH0_CLIENT_SECRET}
+      - STRIPE_API_KEY=${STRIPE_API_KEY}
+    volumes:
+      - ./data:/app/data
+    restart: unless-stopped
+    networks:
+      - corpus-network
+
+  nginx:
+    image: nginx:alpine
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf
+      - ./ssl:/etc/nginx/ssl
+    depends_on:
+      - corpus-core
+    restart: unless-stopped
+    networks:
+      - corpus-network
+
+networks:
+  corpus-network:
+    driver: bridge
+```
+
+#### Option 3: Cloud Platform Deployment
+
+##### AWS ECS Deployment
+```bash
+# Build and push to ECR
+aws ecr create-repository --repository-name corpus-core-saas
+docker build -t corpus-core-saas .
+docker tag corpus-core-saas:latest <account>.dkr.ecr.<region>.amazonaws.com/corpus-core-saas:latest
+docker push <account>.dkr.ecr.<region>.amazonaws.com/corpus-core-saas:latest
+
+# Deploy to ECS
+aws ecs create-cluster --cluster-name corpus-core
+aws ecs register-task-definition --cli-input-json file://task-definition.json
+aws ecs create-service --cluster corpus-core --service-name corpus-core-service --task-definition corpus-core:1
+```
+
+##### Google Cloud Run
+```bash
+# Build and deploy
+gcloud builds submit --tag gcr.io/PROJECT-ID/corpus-core-saas
+gcloud run deploy corpus-core-saas --image gcr.io/PROJECT-ID/corpus-core-saas --platform managed
+
+# Set environment variables
+gcloud run services update corpus-core-saas --set-env-vars "AUTH0_DOMAIN=your-domain,STRIPE_API_KEY=your-key"
+```
+
+### Production Configuration
+
+#### Nginx Reverse Proxy
+```nginx
+# nginx.conf
+server {
+    listen 80;
+    server_name your-domain.com;
+    return 301 https://$server_name$request_uri;
+}
+
+server {
+    listen 443 ssl http2;
+    server_name your-domain.com;
+
+    ssl_certificate /etc/nginx/ssl/cert.pem;
+    ssl_certificate_key /etc/nginx/ssl/key.pem;
+    ssl_protocols TLSv1.2 TLSv1.3;
+    ssl_ciphers ECDHE-RSA-AES256-GCM-SHA512:DHE-RSA-AES256-GCM-SHA512;
+
+    location / {
+        proxy_pass http://corpus-core:8501;
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto $scheme;
+        
+        # WebSocket support for Streamlit
+        proxy_http_version 1.1;
+        proxy_set_header Upgrade $http_upgrade;
+        proxy_set_header Connection "upgrade";
+    }
+}
+```
+
+#### Environment Variables
+```bash
+# Production .env
+AUTH0_DOMAIN=your-auth0-domain.auth0.com
+AUTH0_CLIENT_ID=your-client-id
+AUTH0_CLIENT_SECRET=your-client-secret
+
+STRIPE_API_KEY=sk_live_your_stripe_key
+STRIPE_WEBHOOK_SECRET=whsec_your_webhook_secret
+
+GENERAL_COMPANY_NAME=Your Company
+GENERAL_SUPPORT_EMAIL=support@yourcompany.com
+
+# Monitoring
+SENTRY_DSN=https://your-sentry-dsn
+LOG_LEVEL=INFO
+```
+
+### Monitoring & Maintenance
+
+#### Health Checks
+```bash
+# Application health
+curl -f http://localhost:8501/_stcore/health
+
+# Database connectivity
+curl -f http://localhost:8501/api/health/db
+
+# External services
+curl -f http://localhost:8501/api/health/auth0
+curl -f http://localhost:8501/api/health/stripe
+```
+
+#### Backup Strategy
+```bash
+#!/bin/bash
+# backup.sh
+DATE=$(date +%Y%m%d_%H%M%S)
+
+# Backup database
+pg_dump corpus_core > "backup_db_${DATE}.sql"
+
+# Backup user data
+tar -czf "backup_data_${DATE}.tar.gz" data/
+
+# Upload to cloud storage (AWS S3 example)
+aws s3 cp "backup_db_${DATE}.sql" s3://your-backup-bucket/database/
+aws s3 cp "backup_data_${DATE}.tar.gz" s3://your-backup-bucket/data/
+
+# Cleanup old backups (keep 30 days)
+find /backups -name "*.sql" -mtime +30 -delete
+find /backups -name "*.tar.gz" -mtime +30 -delete
 ```
 
 ## 📊 Monitoring & Analytics
