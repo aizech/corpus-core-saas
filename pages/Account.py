@@ -8,13 +8,16 @@ with one_cola:
     col1a, col2a = st.columns([2, 6])
 
     with col1a:
-        #team_image = config.LOGO_TEAM_PATH
+        # team_image = config.LOGO_TEAM_PATH
         st.image(f"assets/godsinwhite_team_{st.session_state.theme}.png", width=400)
-        #st.image(team_image, width=400)
+        # st.image(team_image, width=400)
     with col2a:
-        st.markdown("""
+        st.markdown(
+            """
         # Account
-        """, unsafe_allow_html=True)
+        """,
+            unsafe_allow_html=True,
+        )
 
 
 # Set Stripe API key from secrets
@@ -26,6 +29,7 @@ if STRIPE_ENABLED:
         stripe.api_key = st.secrets.get("stripe_api_key", "")
 else:
     stripe.api_key = None
+
 
 def is_email_subscribed_to_product(email):
     """
@@ -44,9 +48,7 @@ def is_email_subscribed_to_product(email):
             try:
                 # Check if customer has any active subscriptions
                 subscriptions = stripe.Subscription.list(
-                    customer=customer['id'],
-                    status='active',
-                    limit=10
+                    customer=customer["id"], status="active", limit=10
                 )
 
                 # If any active subscription exists, consider them subscribed
@@ -55,12 +57,16 @@ def is_email_subscribed_to_product(email):
 
             except stripe.error.StripeError as e:
                 # Log the error but continue checking other customers
-                st.error(f"Error checking subscriptions for customer {customer['id']}: {str(e)}")
+                st.error(
+                    f"Error checking subscriptions for customer {customer['id']}: {str(e)}"
+                )
                 continue
 
     except stripe.error.PermissionError:
         # Handle permission errors gracefully
-        st.warning("Unable to verify subscription status due to API permissions. Defaulting to free tier.")
+        st.warning(
+            "Unable to verify subscription status due to API permissions. Defaulting to free tier."
+        )
         return False
 
     except stripe.error.StripeError as e:
@@ -75,63 +81,84 @@ def is_email_subscribed_to_product(email):
 
     return False
 
+
 is_subscribed = is_email_subscribed_to_product(st.user.email)
 
 # Language selection
 # get browser language
-#st.write(f"Locale: {st.context.locale}")
-browser_language = st.session_state.get('browser_language', 'en')
-if 'lang' not in st.session_state:
+# st.write(f"Locale: {st.context.locale}")
+browser_language = st.session_state.get("browser_language", "en")
+if "lang" not in st.session_state:
     st.session_state.lang = browser_language
     lang = browser_language
 else:
     lang = st.session_state.lang
 
-if lang == 'en':
+if lang == "en":
     from locales.en import translations
-elif lang == 'de':
+elif lang == "de":
     from locales.de import translations
 
 _lang = translations[lang]
 
 
 if st.user.is_logged_in:
-    #st.markdown(f"## Welcome {st.user.name}")
+    # st.markdown(f"## Welcome {st.user.name}")
 
     if is_subscribed:
         account_type = _lang["Premium (Paid)"]
     else:
         account_type = _lang["Free (Trial)"]
-    
+
     avatar = st.user.picture
 
     account_container = st.container()
     with account_container:
-        #st.markdown(f"<div style='font-size: 24px;'><img src='{avatar}' style='width: 34px; height: 34px; border-radius: 50%; margin-bottom: 15px;'></div> {st.user.name} ({st.user.email})", unsafe_allow_html=True)
+        # st.markdown(f"<div style='font-size: 24px;'><img src='{avatar}' style='width: 34px; height: 34px; border-radius: 50%; margin-bottom: 15px;'></div> {st.user.name} ({st.user.email})", unsafe_allow_html=True)
 
-        col1s, col2s, col3s, col4s = st.columns([0.1, 0.3, 0.4, 0.2], vertical_alignment="bottom")
+        col1s, col2s, col3s, col4s = st.columns(
+            [0.1, 0.3, 0.4, 0.2], vertical_alignment="bottom"
+        )
         with col1s:
             if st.user.is_logged_in:
                 avatar = st.user.picture
-                st.markdown(f"<div style='font-size: 24px; margin-top: -22px;'><img src='{avatar}' style='width: 34px; height: 34px; border-radius: 50%; margin-bottom: 15px;'></div>", unsafe_allow_html=True)
+                st.markdown(
+                    f"<div style='font-size: 24px; margin-top: -22px;'><img src='{avatar}' style='width: 34px; height: 34px; border-radius: 50%; margin-bottom: 15px;'></div>",
+                    unsafe_allow_html=True,
+                )
             else:
-                st.markdown(f"<div style='font-size: 24px; margin-top: -22px; margin-bottom: 15px;'>:material/account_circle:</div>", unsafe_allow_html=True)
+                st.markdown(
+                    f"<div style='font-size: 24px; margin-top: -22px; margin-bottom: 15px;'>:material/account_circle:</div>",
+                    unsafe_allow_html=True,
+                )
         with col2s:
-            #is_subscribed = is_email_subscribed_to_product(st.user.email)
-            #color = "red" if not is_subscribed else "green"
+            # is_subscribed = is_email_subscribed_to_product(st.user.email)
+            # color = "red" if not is_subscribed else "green"
             color = "grey"
             if is_subscribed:
                 account_type = _lang["Premium (Paid)"]
             else:
                 account_type = _lang["Free (Trial)"]
-            
-            st.markdown(f"<div style='margin-top: -22px;'>{st.user.name}</div>", unsafe_allow_html=True)
-            st.markdown(f"<div style='margin-top: -18px; color:{color}; font-size: 12px'>{account_type}</div>", unsafe_allow_html=True)
+
+            st.markdown(
+                f"<div style='margin-top: -22px;'>{st.user.name}</div>",
+                unsafe_allow_html=True,
+            )
+            st.markdown(
+                f"<div style='margin-top: -18px; color:{color}; font-size: 12px'>{account_type}</div>",
+                unsafe_allow_html=True,
+            )
         with col3s:
             # Only show Manage Subscription link for premium users
             if is_subscribed:
-                st.markdown("<a href='https://billing.stripe.com/p/login/7sY4gA2m110Vanb3Op0Fi00' target='_blank'>Manage Subscription</a>", unsafe_allow_html=True)
-            st.markdown(f"<div style='margin-top: -18px; color:{color}; font-size: 12px'>{st.user.email}</div>", unsafe_allow_html=True)
+                st.markdown(
+                    "<a href='https://billing.stripe.com/p/login/7sY4gA2m110Vanb3Op0Fi00' target='_blank'>Manage Subscription</a>",
+                    unsafe_allow_html=True,
+                )
+            st.markdown(
+                f"<div style='margin-top: -18px; color:{color}; font-size: 12px'>{st.user.email}</div>",
+                unsafe_allow_html=True,
+            )
         with col4s:
             if st.button(_lang["Sign out"], key="sign_out", type="secondary"):
                 st.logout()
@@ -139,9 +166,13 @@ if st.user.is_logged_in:
     st.markdown("---")
 
     if is_subscribed:
-        st.markdown(f"*{_lang['Thank you for being a Valued Subscriber!']}*", unsafe_allow_html=True)
-        
-        st.markdown("""
+        st.markdown(
+            f"*{_lang['Thank you for being a Valued Subscriber!']}*",
+            unsafe_allow_html=True,
+        )
+
+        st.markdown(
+            """
 
 **{_lang['Dear']} {st.user.name},**
 
@@ -161,14 +192,16 @@ if st.user.is_logged_in:
 
 {_lang['Warm regards, The Corpus Analytica Team']}
             
-            """, unsafe_allow_html=True)
-    
-    
+            """,
+            unsafe_allow_html=True,
+        )
+
     else:
-        #st.markdown(f"**{_lang['You are a']} {account_type} {_lang['subscriber']}.**")
+        # st.markdown(f"**{_lang['You are a']} {account_type} {_lang['subscriber']}.**")
         st.markdown(f"**{_lang['Thank you for being a Valued Subscriber!']}**")
         st.markdown("---")
-        st.markdown(f"""    
+        st.markdown(
+            f"""    
 ## :material/star: {_lang['Unlock the Power of Expert Medical Insight']}
 
 **{_lang['Dear']} {st.user.name},**
@@ -189,19 +222,23 @@ if st.user.is_logged_in:
 
 :material/lock_open: {_lang['Upgrade to experience the future of digital health.']}
 
-            """, unsafe_allow_html=True)
+            """,
+            unsafe_allow_html=True,
+        )
         add_auth(
             required=False,  # Don't stop the app for non-subscribers
             show_redirect_button=True,
             subscription_button_text="Upgrade",
-            #button_color="#4CAF50",  # Green button
+            # button_color="#4CAF50",  # Green button
             button_color="#cb785c",
-            use_sidebar=False  # Show button in main section
+            use_sidebar=False,  # Show button in main section
         )
 
-        st.markdown(_lang["Warm regards, **The Corpus Analytica Team**"], unsafe_allow_html=True)
+        st.markdown(
+            _lang["Warm regards, **The Corpus Analytica Team**"], unsafe_allow_html=True
+        )
 
 else:
-    st.markdown(_lang["Please login first"]) 
+    st.markdown(_lang["Please login first"])
     st.markdown("---")
     st.stop()

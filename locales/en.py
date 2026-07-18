@@ -10,7 +10,7 @@ translations = {
         "Pricing": "Pricing",
         "Help": "Help",
         "Welcome to CorpusCoreSaaS": "Welcome to Corpus Core - SaaS",
-        "Gods in White is your personal gateway to advanced medical diagnostics—powered by AI and backed by real medical expertise. Designed for patients, healthcare professionals, and curious minds alike, this app transforms how medical images are analyzed and understood." : "Corpus Core - SaaS is a reusable Streamlit SaaS template that demonstrates authentication, subscriptions, and page-level access control.",
+        "Gods in White is your personal gateway to advanced medical diagnostics—powered by AI and backed by real medical expertise. Designed for patients, healthcare professionals, and curious minds alike, this app transforms how medical images are analyzed and understood.": "Corpus Core - SaaS is a reusable Streamlit SaaS template that demonstrates authentication, subscriptions, and page-level access control.",
         "Welcome to the Corpus Analytica Platform": "Welcome to Corpus Core - SaaS",
         "Login with your Google or Microsoft account": "Login with your Google or Microsoft account",
         "Login with Google": "Login with Google",
